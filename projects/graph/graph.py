@@ -66,15 +66,17 @@ class Graph:
                 print(vertex)
                 for next_vertex in self.vertices[vertex]:
                     stack.push(next_vertex)
-
-    def dft_recursive(self, starting_vertex, visited=set()):
+#  
+    def dft_recursive(self, starting_vertex, visited = set()):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
 
         This should be done using recursion.
         """
+        # visited = set()
         if starting_vertex not in visited:
+           
             print(starting_vertex)
             visited.add(starting_vertex)
             neighbors = self.get_neighbors(starting_vertex)
@@ -99,26 +101,26 @@ class Graph:
             visited = set()
 
 
-            while queue:
+        while queue:
 
-                path = queue.dequeue()
-                last_vertex = path[-1]
+            path = queue.dequeue()
+            last_vertex = path[-1]
 
-                adjacent_vertices = self.vertices[last_vertex]
+            adjacent_vertices = self.vertices[last_vertex]
 
-                # cycle through all non visited adjacent vertices
-                for vertex in adjacent_vertices:
-                    if vertex not in visited:
-                        new_path = path.copy()
-                        new_path.append(vertex)
-                        if vertex == destination_vertex:
-                            return new_path
-                        else:
-                            queue.enqueue(new_path)
-                visited.add(last_vertex)
-                
-                
-            return []
+            # cycle through all non visited adjacent vertices
+            for vertex in adjacent_vertices:
+                if vertex not in visited:
+                    new_path = path.copy()
+                    new_path.append(vertex)
+                    if vertex == destination_vertex:
+                        return new_path
+                    else:
+                        queue.enqueue(new_path)
+            visited.add(last_vertex)
+            
+            
+        return []
 
 
     def dfs(self, starting_vertex, destination_vertex, visited=None):
